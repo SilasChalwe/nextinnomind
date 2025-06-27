@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Get Started – NextInnoMind</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    body, html {
+      margin: 0; padding: 0; height: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #6A11CB 0%, #2575FC 100%);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .container {
+      background: rgba(255 255 255 / 0.1);
+      border-radius: 16px;
+      padding: 30px 40px;
+      max-width: 460px;
+      width: 100%;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 0 25px rgba(0,0,0,0.3);
+    }
+    h1 {
+      font-size: 2.6rem;
+      margin: 0 0 10px 0;
+      text-align: center;
+    }
+    p.description {
+      font-size: 1.1rem;
+      margin: 0 0 25px 0;
+      text-align: center;
+      line-height: 1.4;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      overflow-y: auto;
+      max-height: 50vh;
+      padding-right: 5px;
+    }
+    label {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    input, textarea {
+      border: none;
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 1rem;
+      resize: vertical;
+      font-family: inherit;
+      color: #000;
+    }
+    textarea {
+      min-height: 100px;
+      max-height: 150px;
+    }
+    input:focus, textarea:focus {
+      outline: 2px solid #2575FC;
+      background: #fff;
+      color: #000;
+    }
+    button {
+      margin-top: 10px;
+      background: #fff;
+      color: #2575FC;
+      font-weight: 700;
+      font-size: 1.15rem;
+      padding: 14px 0;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.25s ease;
+    }
+    button:hover {
+      background: #eee;
+    }
+    .feedback-message {
+      margin-top: 10px;
+      font-weight: 600;
+      text-align: center;
+      display: none;
+    }
+    footer {
+      margin-top: 25px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: rgba(255 255 255 / 0.7);
+    }
+    footer a {
+      color: white;
+      text-decoration: underline;
+      font-weight: 600;
+    }
+    @media (max-width: 480px) {
+      .container {
+        padding: 25px 20px;
+      }
+      h1 {
+        font-size: 2rem;
+      }
+      form {
+        max-height: 45vh;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Get Started with NextInnoMind</h1>
+    <p class="description">
+      Have questions or feedback? Send us a message — we’re here to help you transform education and technology.
+    </p>
+
+    <form id="contactForm" novalidate>
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="name" placeholder="Your full name" required />
+
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" placeholder="Your email address" required />
+
+      <label for="message">Your Message / Feedback</label>
+      <textarea id="message" name="message" placeholder="Write your message here..." required></textarea>
+
+      <button type="submit">Send Message</button>
+
+      <div class="feedback-message" id="feedback"></div>
+    </form>
+
+    <footer>
+      <p>&copy; 2024 NextInnoMind. All rights reserved.</p>
+      <a href="index.html">← Back to Home</a>
+    </footer>
+  </div>
+
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>
+    (function() {
+      emailjs.init('EzNiQkIbcT3mCUf9Z'); // Your EmailJS public API key
+    })();
+
+    const form = document.getElementById('contactForm');
+    const feedback = document.getElementById('feedback');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      if (!form.name.value.trim() || !form.email.value.trim() || !form.message.value.trim()) {
+        feedback.style.color = '#ff6b6b';
+        feedback.textContent = 'Please fill in all fields.';
+        feedback.style.display = 'block';
+        return;
+      }
+
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(form.email.value.trim())) {
+        feedback.style.color = '#ff6b6b';
+        feedback.textContent = 'Please enter a valid email address.';
+        feedback.style.display = 'block';
+        return;
+      }
+
+      feedback.style.color = '#9fff9f';
+      feedback.textContent = 'Sending your message...';
+      feedback.style.display = 'block';
+
+      emailjs.sendForm('InvitationGmail', 'template_id', this)
+        .then(function() {
+          feedback.textContent = 'Thank you for your message! We will get back to you soon.';
+          form.reset();
+        }, function(error) {
+          feedback.style.color = '#ff6b6b';
+          feedback.textContent = 'Oops! Something went wrong. Please try again.';
+          console.error('EmailJS error:', error);
+        });
+    });
+  </script>
+</body>
+</html>
