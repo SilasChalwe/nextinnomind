@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextInnoMind - Software & Education Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #7209b7;
+            --accent: #00b4d8;
+            --light: #f8f9fa;
+            --dark: #1a1a2e;
+            --text: #2d3436;
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(67, 97, 238, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 180px 0 100px;
+            background: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;
+            position: relative;
+            color: white;
+            text-align: center;
+        }
+
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 26, 46, 0.85);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 100px 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .section-title p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            color: #666;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.4s;
+            border: 1px solid #eee;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(67, 97, 238, 0.15);
+        }
+
+        .service-icon {
+            height: 200px;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+        }
+
+        .service-content {
+            padding: 30px;
+        }
+
+        .service-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .service-content p {
+            margin-bottom: 20px;
+            color: #666;
+        }
+
+        /* Categories Section */
+        .categories {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e6e9ff 100%);
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 16px;
+            padding: 40px 25px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(67, 97, 238, 0.1);
+            border-color: var(--primary);
+        }
+
+        .category-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .category-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        /* About Section */
+        .about {
+            padding: 100px 0;
+            background: white;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .about-image {
+            flex: 1;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h2 {
+            font-size: 2.8rem;
+            margin-bottom: 25px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        .ceo-signature {
+            margin-top: 30px;
+            font-style: italic;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 70px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .hero {
+                padding: 200px 0 80px;
+            }
+            
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <div class="logo-icon">NIM</div>
+                    <div class="logo-text">NextInnoMind</div>
+                </div>
+                <div class="nav-links">
+                    <a href="#home">Home</a>
+                    <a href="#services">Services</a>
+                    <a href="#categories">Categories</a>
+                    <a href="#about">About</a>
+                    <a href="studypal.html">StudyPal</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <button class="cta-button">Get Started</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content animate">
+                <h1>Transforming Education Through Innovative Technology</h1>
+                <p>NextInnoMind delivers cutting-edge software solutions and educational platforms that empower learners and organizations worldwide</p>
+                <button class="cta-button">Explore Our Solutions</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-title animate">
+                <h2>Our Innovative Services</h2>
+                <p>Discover how NextInnoMind is reshaping education and software development</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card animate delay-1">
+                    <div class="service-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Educational Platforms</h3>
+                        <p>Custom learning management systems, interactive courses, and AI-powered educational tools that transform how people learn.</p>
+                        <button class="cta-button">Learn More</button>
+                    </div>
+                </div>
+                <div class="service-card animate delay-2">
+                    <div class="service-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Software Development</h3>
+                        <p>Enterprise-grade applications, mobile solutions, and cloud platforms tailored to your organization's unique requirements.</p>
+                        <button class="cta-button">Learn More</button>
+                    </div>
+                </div>
+                <div class="service-card animate delay-3">
+                    <div class="service-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>AI & Machine Learning</h3>
+                        <p>Intelligent solutions that leverage artificial intelligence to automate processes, gain insights, and enhance decision-making.</p>
+                        <button class="cta-button">Learn More</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section id="categories" class="categories">
+        <div class="container">
+            <div class="section-title animate">
+                <h2>Explore Our Categories</h2>
+                <p>Access our diverse range of solutions tailored to your needs</p>
+            </div>
+            <div class="category-grid">
+                <div class="category-card animate delay-1">
+                    <div class="category-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Search Engines</h3>
+                    <p>Intelligent search solutions for educational content and resources</p>
+                </div>
+                <div class="category-card animate delay-2">
+                    <div class="category-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3>Video Platforms</h3>
+                    <p>Educational video solutions and interactive media experiences</p>
+                </div>
+                <div class="category-card animate delay-3">
+                    <div class="category-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <h3>Educational Games</h3>
+                    <p>Engaging game-based learning experiences for all ages</p>
+                </div>
+                <div class="category-card animate delay-1">
+                    <div class="category-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>E-Learning</h3>
+                    <p>Comprehensive digital learning platforms and courses</p>
+                </div>
+                <div class="category-card animate delay-2">
+                    <div class="category-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Analytics</h3>
+                    <p>Data-driven insights for educational institutions</p>
+                </div>
+                <div class="category-card animate delay-3">
+                    <div class="category-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>AI Tutors</h3>
+                    <p>Intelligent tutoring systems powered by artificial intelligence</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-image animate">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Silas Chalwe, CEO of NextInnoMind">
+                </div>
+                <div class="about-text animate delay-1">
+                    <h2>About Our Vision</h2>
+                    <p>Founded by Silas Chalwe, NextInnoMind emerged from a passion for combining technology with education to create meaningful change. With over a decade of experience in software development and educational innovation, Silas envisioned a company that bridges the gap between cutting-edge technology and accessible learning.</p>
+                    <p>At NextInnoMind, we believe that technology should empower, educate, and elevate. Our mission is to create solutions that make quality education accessible to everyone, everywhere.</p>
+                    <p>Our team of passionate engineers, educators, and designers work tirelessly to develop products that transform how people learn, work, and grow.</p>
+                    <p class="ceo-signature">- Silas Chalwe, Founder & CEO</p>
+                    <button class="cta-button">Meet Our Team</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>NextInnoMind</h3>
+                    <p>Transforming education through innovative technology solutions that empower learners and organizations worldwide.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#categories">Categories</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="studypal.html">StudyPal</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Our Products</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">StudyPal AI</a></li>
+                        <li><a href="#">EduSearch</a></li>
+                        <li><a href="#">LearnStream Video</a></li>
+                        <li><a href="#">SkillCraft Games</a></li>
+                        <li><a href="#">Analytics Suite</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> Innovation Hub, Lusaka, Zambia</li>
+                        <li><i class="fas fa-phone"></i> +260 123 456 789</li>
+                        <li><i class="fas fa-envelope"></i> info@nextinnomind.com</li>
+                        <li><i class="fas fa-clock"></i> Mon-Fri: 9AM - 6PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 NextInnoMind. All rights reserved. Founded by Silas Chalwe.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Animation on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            document.querySelectorAll('.service-card, .section-title, .category-card, .about-image, .about-text').forEach(el => {
+                observer.observe(el);
+            });
+            
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
